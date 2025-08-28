@@ -1,4 +1,4 @@
-# Minimal README — Terraform · GKE · Helm · CI/CD
+# Terraform · GKE · Helm · CI/CD
 
 This repo demonstrates a tiny backend service deployed to a small public **GKE** cluster using **Terraform**, containerized with **Docker**, shipped via **Helm**, and automated by **GitHub Actions**. It also shows **scaling** via HPA (CPU) or KEDA (requests/sec).
 
