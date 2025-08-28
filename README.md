@@ -88,16 +88,6 @@ helm upgrade --install backend ./charts/backend -n default   --set keda.enabled=
 Tune thresholds & query under `values.yaml -> keda.prometheus.*`. Template: `templates/keda-scaledobject.yaml`.
 
 ---
-
-## Follow-up Assessment (self-check)
-- **Terraform (25%)**: `terraform apply` succeeds; `kubectl get nodes` shows 1–2 nodes in the cluster.
-- **Docker (15%)**: `docker build` and `docker push` succeed; container serves `/healthz` (200).
-- **Helm (25%)**: `helm upgrade --install` creates Deployment, Service, probes OK, Istio stub present.
-- **CI/CD (20%)**: Pushing to `main` builds image and deploys automatically to GKE.
-- **Scaling (15%)**: HPA shows targets and scales; KEDA path documented for requests/sec.
-
----
-
 ## Cleanup
 ```bash
 helm uninstall backend -n default || true
