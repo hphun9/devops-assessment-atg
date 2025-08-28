@@ -36,6 +36,24 @@ docker push $IMAGE
 
 ## 3) Deploy via Helm
 ```bash
+# Install Istio CRDs to use Gateway/VirtualService
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm repo update
+
+helm upgrade --install istio-base istio/base -n istio-system --create-namespace
+helm upgrade --install istiod istio/istiod -n istio-system
+
+helm upgrade --install istio-ingress istio/gateway -n istio-system
+
+# Verify CRDs:
+kubectl get crd | grep -E 'istio.io|gateway.networking'
+
+# Install CRDs KEDA:
+helm repo add kedacore https://kedacore.github.io/charts
+helm repo update
+helm upgrade --install keda kedacore/keda -n keda --create-namespace
+```
+```bash
 cd charts/backend
 helm upgrade --install backend .   --namespace default --create-namespace   --set image.repository=ghcr.io/<owner>/<repo>   --set image.tag=dev
 
